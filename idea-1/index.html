@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="index.js"></script>
+    <script src="textGen.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="description"></div>
+    <div id="guess">
+        <div id="guess-description">
+            Take a guess.
+        </div>
+        <form action="#">
+            <input type="text" id="guess-input" onkeypress="handleGuess(event)">
+        </form>
+    </div>
+
+    <div id="phone-screen">
+        <div id="time-display">10:10</div>
+        <div id="top-bar">    
+            <div id="person-display">
+                <img id="person-image" src="https://static.vecteezy.com/system/resources/previews/021/495/996/original/chatgpt-openai-logo-icon-free-png.png" alt="">
+                <div id="person-text">Openai</div>
+            </div>
+            <div id="wierd-apple-bar"></div>
+        </div>
+        <form action="#">   
+            <div id="input-area-surroundings" style="height: 50px;">
+                <textarea id="input-area" style="resize: none; overflow: hidden;" oninput="autoGrow(this);" onkeypress="handle(event)"></textarea>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
