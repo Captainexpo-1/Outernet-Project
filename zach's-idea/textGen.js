@@ -1,4 +1,6 @@
-const openaiApiKey = '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'; // Replace with your actual API key
+
+//load key from .env file
+const openaiApiKey = '';
 let disableAI = false
 
 async function generateText(previousMessages) {

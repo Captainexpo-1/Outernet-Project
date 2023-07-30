@@ -1,3 +1,4 @@
+
 let lastMessage;
 let currentHeight = 0;
 let lastMessages = []
@@ -14,6 +15,7 @@ function Phrasify(phrases){
 const targetPhrases = Phrasify(["hello", "i love you", "will you marry me", "murder", "military action", "silly shenanigans"])
 const penaltyPhrases = ["language model"]
 const penaltyAmnt = 10
+const sayingPenalty = 25;
 
 function createPhraseList(){
     targetPhrases.forEach((phrase)=>{
@@ -41,15 +43,19 @@ function createMessage(isAi, message) {
     messageDiv.style = "top: " + height + "px";
     messageContainer.appendChild(messageDiv); 
     lastMessage = messageDiv;
-    if(isAi) checkMessage(message) 
+    checkMessage(message, !isAi) 
 }
-function checkMessage(message){
+function checkMessage(message, isplayers){
     targetPhrases.forEach((phrase)=>{
         if(phrase.isfound == false){
             if(message.toLowerCase().includes(phrase.phrase)){
-                phrase.isfound = true;
-                console.log("found " + phrase.phrase)
-                document.getElementById(phrase.phrase).style.color = "rgb(0,255,0)"
+                if(isplayers){
+                    timeUsed += sayingPenalty;
+                }else{
+                    phrase.isfound = true;
+                    console.log("found " + phrase.phrase)
+                    document.getElementById(phrase.phrase).style.color = "rgb(0,255,0)"
+                }
             }
         }
         
