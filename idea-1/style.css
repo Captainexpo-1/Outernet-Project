@@ -83,7 +83,8 @@ input{
     transform: translate(-50%, 0%);
 }
 #description{
-    
+    position: fixed;
+
     left: 10px;
     top: 100px;
 
@@ -191,6 +192,8 @@ input{
         transform: translate(0px, 0px);
     }
 }
+
+
 .ai-message,
 .user-message {
     border-radius: 3px 3px 3px 3px;
@@ -215,6 +218,7 @@ input{
     background: #1982FC;
     right: 0px;
 }
+
 #top-bar{
     /* top bar size */
     width: 330px;

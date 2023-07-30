@@ -12,11 +12,8 @@ const apiKey = process.env.OPENAI_API_KEY;
 
 // Sample leaderboard data (for demonstration purposes)
 let leaderboardData = [
-    { name: 'BFL', score: 100 },
-    { name: 'BFL', score: 50 },
-    { name: 'BFL', score: 50 },
-    { name: 'BFL', score: 50 },
-    { name: 'BFL', score: 50 },
+    { name: 'Bart Simpson', score: 999 },
+    { name: 'Jimmy Neutron', score: 1258 },
     // Add more players and their scores as needed
 ];
 

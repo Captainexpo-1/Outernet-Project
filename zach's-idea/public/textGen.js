@@ -8,9 +8,9 @@ async function generateText(previousMessages) {
 
     let openaiApiKey = await axios.get('/get-key');
     //parse key from response
-    openaiApiKey = openaiApiKey.data;
     if(disableAI) return;
     console.log(previousMessages)
+    if(previousMessages.length > 5) previousMessages.shift()
     try {
         const response = await axios.post(
             'https://api.openai.com/v1/chat/completions',
@@ -24,7 +24,7 @@ async function generateText(previousMessages) {
                 headers: {
                     'Content-Type': 'application/json',
                     
-                    'Authorization': `Bearer ${openaiApiKey}`,
+                    'Authorization': `Bearer ${openaiApiKey.data}`,
                 },
             }
         );

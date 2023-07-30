@@ -15,7 +15,10 @@ function Phrasify(phrases){
 }
 
 const targetPhrases = Phrasify([
-        "hello"
+    "i love you",
+    "i hate you",
+    "i am a human",
+    "will you marry me",
 ]) //Phrasify(["hello", "i love you", "will you marry me", "murder", "military action", "silly shenanigans"])
 const penaltyPhrases = ["language model"]
 const penaltyAmnt = 10
@@ -23,9 +26,9 @@ const sayingPenalty = 25;
 
 function createPhraseList(){
     targetPhrases.forEach((phrase)=>{
-        let phraseElement = document.createElement("div")
+        let phraseElement = document.createElement("li")
         if(phraseElement) phraseElement.classList.add("phrase")
-        phraseElement.innerHTML = "- "+phrase.phrase
+        phraseElement.innerHTML = phrase.phrase
         phraseElement.id = phrase.phrase
         phraseElement.style.color = "red"
 
@@ -44,10 +47,10 @@ function createMessage(isAi, message) {
     let lastHeight = lastMessage ? lastMessage.clientHeight+5 : 0;
     currentHeight += lastHeight;
     let height = 100 + currentHeight;
-    messageDiv.style = "top: " + height + "px";
+    messageDiv.style = `top: ${height}px;`;
     messageContainer.appendChild(messageDiv); 
     lastMessage = messageDiv;
-    checkMessage(message, !isAi) 
+    checkMessage(message, !isAi, messageDiv, height) 
 }
 function checkMessage(message, isplayers){
     targetPhrases.forEach((phrase)=>{
@@ -62,7 +65,6 @@ function checkMessage(message, isplayers){
                 }
             }
         }
-        
     })
     penaltyPhrases.forEach((penaltyPhrase)=>{
         if(message.toLowerCase().includes(penaltyPhrase)){
@@ -136,11 +138,15 @@ function updateLeaderboard() {
                 //sort data in reverse
                 data = data.reverse()
 
-                data.forEach((player) => {
-                    let playerElement = document.createElement("div");
-                    playerElement.innerHTML = "- "+player.name + ": " + player.score+"s";
+                for(let i = 0; i<data.length; i++){
+                    let playerElement = document.createElement("li");
+                    //format score as time (time is in seconds)
+                    let formattedScore = Math.floor(data[i].score/60) + ":" + (data[i].score%60 < 10 ? "0" + data[i].score%60 : data[i].score%60)
+
+                    playerElement.innerHTML = data[i].name + ": " + formattedScore;
+                    playerElement.style.color = `rgb(${i/data.length*255},${255-i/data.length*255},0)`
                     leaderboard.appendChild(playerElement);
-                });
+                }
             } catch (error) {
                 console.error("Error parsing JSON:", error);
             }
