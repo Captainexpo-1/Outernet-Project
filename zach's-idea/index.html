@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="index.js"></script>
+    <script src="textGen.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="description">
+        Wow words
+    </div>
+    <div id="phrase-list">
+    </div>
+    <div id="messages-container">
+    </div>
+    <form action="#">
+        <textarea name="" id="input-area" style="resize: none; width: 25%;" oninput="autoGrow(this)" onkeydown="handle(event)" rows="1"></textarea>
+    </form>
+    <div id="time-display">00:00</div>
+</body>
+</html>

@@ -1,7 +1,7 @@
 let lastMessage;
 let currentHeight = 0;
 let lastMessages = []
-
+let battery = 5
 
 
 function createMessage(isAi, message) {
@@ -16,6 +16,7 @@ function createMessage(isAi, message) {
     messageDiv.style = "top: " + height + "px";
     phone.appendChild(messageDiv); 
     lastMessage = messageDiv;
+    
 }
 function autoGrow(element){
     
@@ -29,7 +30,10 @@ function handle(e){
         const message = document.querySelector("#input-area").value;
         document.querySelector("#input-area").value = "";
         createMessage(false, message);
-        createAIMessage(message);
+        new Audio("audio/send.wav").play()
+        battery-=1
+        updateBattery()
+        setTimeout(()=>{createAIMessage(message)}, Math.random()*3000);
     }
 }
 async function createAIMessage(prompt){
@@ -38,14 +42,10 @@ async function createAIMessage(prompt){
     lastMessages.push(last)
     let msg = await generateText(lastMessages)
     createMessage(true, msg);
+    new Audio("audio/recieve.wav").play()
 }
-function updateDescription(){
-    const description = document.querySelector("#description");
-    const d = new Date()
-
-    console.log(minutes)
-    let descriptionText = "Guess who the hell is trying to text you of all<br> people at: " + d.getHours() + ":" + minutes
-    description.innerHTML = descriptionText    
+function updateDescription(elem){
+    elem.remove()
 }
 function updateTime(){
     const time = document.querySelector("#time-display");
@@ -56,7 +56,7 @@ function updateTime(){
     } else {
         minutes = d.getMinutes().toString()
     }
-    let timeText = d.getHours() + ":" + minutes
+    let timeText = (d.getHours()==12 || d.getHours()==24 ? 12 : d.getHours()%12) + ":" + minutes
     time.innerHTML = timeText
     setTimeout(updateTime, 1000)
 }
@@ -74,4 +74,18 @@ function handleGuess(event){
             },2000)
         }
     }
+}    
+function updateBattery(){
+    if(battery == -1){
+        while(true){
+            alert("you failed dingus.")
+        }
+    }else{
+        const percentage = (battery/5)
+        console.log(battery/5)
+        document.querySelector("#battery-innards").setAttribute("style", `background-color: rgb(0,255,0); width: ${battery/5*100}%; height: 100%;`) //`linear-gradient(to right, rgb(${Math.floor(percentage*255)}, ${Math.floor(255-percentage*255)}, ${0}) ${100*percentage}, #5d454500 ${100*percentage});`
+    }
 }
+addEventListener("DOMContentLoaded", ()=>{
+    updateBattery()
+})

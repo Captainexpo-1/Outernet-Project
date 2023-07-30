@@ -3,6 +3,9 @@
 html{
 
 }
+italic{
+    font-style: italic;
+}
 body{
     /* good font for texts */
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -11,6 +14,7 @@ body{
 }
 textarea{
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    position: fixed;
 }
 input{
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
@@ -33,6 +37,15 @@ input{
     width: 30%;
     height: 20px;
     border-radius: 0px 0px 20px 20px;
+}
+#battery-container{
+    position: fixed;
+    top: 8px;
+    right: 20px;
+    width: 20px;
+    height: 10px;
+    border: 2px solid black;
+    border-radius: 5px;
 }
 #time-display{
     left: 40px;
@@ -81,7 +94,16 @@ input{
 
     position: absolute;
     margin: 0px;
+
+    text-shadow: 3px 3px black;
+
+    transition: 1s;
 }
+#description:hover{
+    text-shadow: 2px 2px black;
+    color: rgb(226, 226, 255);
+}
+/*create an animation*/
 
 #input-area{
     height: 20px;
@@ -147,12 +169,27 @@ input{
     margin: 0px;
 
     /* center phone screen */
-    left: 50%;
-    top: 5%;
-    transform: translate(-50%, 0%);   
+    left: calc(50% - 170px);
+    top: 2%;
+    transform: translate(-50%, 0%);
 
     overflow-x: auto;
     overflow-y: auto;
+
+    box-shadow: 10px 10px rgb(54, 54, 54);
+
+    animation: infinite 5s moveUpandDown ease;
+}
+@keyframes moveUpandDown{
+    0%{
+        transform: translate(0px, 0px);
+    }
+    50%{
+        transform: translate(0px, 10px);
+    }
+    100%{
+        transform: translate(0px, 0px);
+    }
 }
 .ai-message,
 .user-message {
@@ -162,7 +199,10 @@ input{
     font-size: 14px;
     line-height: 15px;
     margin-bottom: 0;
-    max-width: 80%;
+    max-width: 200px;
+    height: fit-content;
+    overflow-x: auto;
+    overflow-wrap: break-word;
     padding: 5px 10px;
     position: absolute;
     vertical-align: top;

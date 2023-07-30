@@ -1,39 +1,16 @@
 const openaiApiKey = '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'; // Replace with your actual API key
-
-let randomEmotionChoices = [
-    "drunk", 
-    "sad",
-    "happy",
-    "angry",
-    "depressed",
-    "lonely",
-    "excited",
-    "bored",
-    "tired",
-    "hungry",
-    "thirsty",
-    "high",
-    "stoned",
-    "sleepy",
-    "annoyed",
-    "confused",
-    "stressed",
-]
-let randomEmotion = randomEmotionChoices[Math.floor(Math.random() * randomEmotionChoices.length)];
-console.log(randomEmotion)
-
+let disableAI = false
 
 async function generateText(previousMessages) {
+    if(disableAI) return;
     console.log(previousMessages)
     try {
         const response = await axios.post(
             'https://api.openai.com/v1/chat/completions',
             {
                 model: 'gpt-3.5-turbo',
-                messages: [
-                    {"role": "system", "content": `You are very ${randomEmotion}, and you will act like it. Don't say you are an AI and don't ever say ${randomEmotion}. Keep your responses to one sentence.`}, 
-                ].concat(previousMessages),
-                temperature: 1,
+                messages: previousMessages,
+                temperature: 0.8,
                 max_tokens: 50,
             },
             {
