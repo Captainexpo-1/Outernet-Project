@@ -1,9 +1,14 @@
 
-//load key from .env file
-const openaiApiKey = '';
+
+//get api key at endpoint /get-key
+
 let disableAI = false
 
 async function generateText(previousMessages) {
+
+    let openaiApiKey = await axios.get('/get-key');
+    //parse key from response
+    openaiApiKey = openaiApiKey.data;
     if(disableAI) return;
     console.log(previousMessages)
     try {
@@ -18,6 +23,7 @@ async function generateText(previousMessages) {
             {
                 headers: {
                     'Content-Type': 'application/json',
+                    
                     'Authorization': `Bearer ${openaiApiKey}`,
                 },
             }

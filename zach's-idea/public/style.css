@@ -19,6 +19,16 @@ textarea{
 input{
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
 }
+#leaderboard{
+    position: fixed;
+    top: 55%;
+}
+#leaderboard li{
+    list-style-type: none;
+    font-size: 20px;
+    color: white;
+    text-shadow: 2px 2px black;
+}
 #time-display{
     left: 50%;
     position: fixed;

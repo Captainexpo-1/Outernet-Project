@@ -1,5 +1,3 @@
-const openaiApiKey = ''; // Replace with your actual API key
-
 let randomEmotionChoices = [
     "drunk", 
     "sad",
