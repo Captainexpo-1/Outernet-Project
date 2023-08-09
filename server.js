@@ -14,22 +14,15 @@ const apiKey = process.env.OPENAI_API_KEY;
 
 // Sample leaderboard data (for demonstration purposes)
 let leaderboardData = [
-    { name: 'Bart Simpson', score: 999 },
-    { name: 'Bart Simpson', score: 888 },
-    { name: 'Bart Simpson', score: 777 },
-    { name: 'Bart Simpson', score: 666 },
-    { name: 'Bart Simpson', score: 555 },
+    {name: "Sam (@sampoder)", score: 15},
+    {name: "Ian", score:  24},
+    {name: "Zach Latta (@zrl)", score:  90},
+    {name: "Fayd", score:  98},
+    {name: "dinobox", score:  122},
+    {name: "Alex", score:  256},
+    {name: "Swarnya", score:  283},
+    {name: "fatimah", score:  355}
 ];
-/*
-{name: Sam (@sampoder), score: 0:15},
-{name: Ian, score:  0:24},
-{name: Zach Latta (@zrl), score:  1:30},
-{name: Fayd, score:  1:38},
-{name: dinobox, score:  2:02},
-{name: Alex, score:  4:16},
-{name: Swarnya, score:  4:43},
-{name: fatimah, score:  5:55}
-*/
 // Set the public folder as a static directory
 app.use(express.static(path.join(__dirname, 'public')));
 
