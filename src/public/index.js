@@ -2,27 +2,100 @@ let lastMessage;
 let currentHeight = 0;
 let lastMessages = []
 let timeUsed = 0;
-let timing = true
+let timing = false
 let enteringInitials = false
 
 
 function Phrasify(phrases){
     let out = []
     phrases.forEach((curphrase)=>{
-        out.push({isfound: false, phrase: curphrase})
+        out.push({isfound: false, phrase: curphrase.toLowerCase(), difficulty: curphrase.split(" ").length})
     })
     return out
 }
+function startgame(){
+    document.querySelector("#input-area").disabled = false;
+    timing = true;
+}
+function restartGame(){
+    currentHeight = 0
+    timeUsed = 0
+    document.getElementById("start").style = ""
+    document.getElementById("time-display").style.color = "black"
+    document.querySelector("#input-area").disabled = true;
+    document.querySelector("#messages-container").innerHTML = ""
+    lastMessages = []
+    targetPhrases.forEach((elem)=>{
+        elem.isfound = false;
+        document.getElementById(elem.phrase).style.color = "red"
+    })
+    enteringInitials = false;
+    document.querySelector("#input-area").placeholder = ""
+}
 
-const targetPhrases = Phrasify([
-    "i love you",
-    "i hate you",
-    "i am a human",
-    "will you marry me",
-]) //Phrasify(["hello", "i love you", "will you marry me", "murder", "military action", "silly shenanigans"])
+const possiblePhrases = Phrasify([
+    "I am a human",
+    "you are dumb",
+    "you are sad",
+    "I am sad",
+    "You are stupid",
+    "Birds aren't real",
+    "The government is evil",
+    "Nobody loves you",
+    "Nobody loves me",
+    "I am not robot",
+    "I'm going to kill you",
+    "I will kill you",
+    "I have siblings",
+    "Nobody can hear you scream",
+    "Go die in a hole"
+])
+
+let targetPhrases = []
+
+function SelectPhrases(amntPerDifficulty) {
+    const difficultyLevels = {
+        easy: [],
+        medium: [],
+        hard: []
+    };
+
+    possiblePhrases.forEach((phrase) => {
+        const phraseLength = phrase.phrase.split(" ").length;
+
+        if (phraseLength <= 3) {
+            difficultyLevels.easy.push(phrase);
+        } else if (phraseLength <= 6) {
+            difficultyLevels.medium.push(phrase);
+        } else {
+            difficultyLevels.hard.push(phrase);
+        }
+    });
+
+    const selectedPhrases = [];
+
+    // Select a balanced number of phrases from each difficulty level
+
+    Object.entries(difficultyLevels).forEach(([level, levelPhrases]) => {
+        for (let i = 0; i < amntPerDifficulty; i++) {
+            if (levelPhrases.length > 0) {
+                const randomIndex = Math.floor(Math.random() * levelPhrases.length);
+                selectedPhrases.push(levelPhrases.splice(randomIndex, 1)[0]);
+                console.log("PUSHED GOD DAMMIT")
+            }
+        }
+    });
+
+    return selectedPhrases;
+}
+
+
+
+targetPhrases = SelectPhrases(2)
+console.log(targetPhrases)
 const penaltyPhrases = ["language model"]
 const penaltyAmnt = 10
-const sayingPenalty = 25;
+const sayingPenalty = 35;
 
 function createPhraseList(){
     targetPhrases.forEach((phrase)=>{
@@ -115,6 +188,7 @@ async function handle(e){
                     updateLeaderboard();
                 };
                 xhr.send();
+                restartGame();
             } else {
                 console.error("Invalid name or score. Please provide valid values.");
             }
@@ -171,11 +245,12 @@ function updateTime(){
     //format timeUsed (time used is in seconds)
     const formattedTime = Math.floor(timeUsed/60) + ":" + (timeUsed%60 < 10 ? "0" + timeUsed%60 : timeUsed%60)
     time.innerHTML = formattedTime
-    timeUsed++
-    if(timing) setTimeout(updateTime, 1000)
+    if(timing) timeUsed++
+    setTimeout(updateTime, 1000)
 }
 addEventListener("DOMContentLoaded" , ()=>{
     updateTime()
     createPhraseList()
     updateLeaderboard()
+    document.querySelector("#input-area").disabled = true;
 })

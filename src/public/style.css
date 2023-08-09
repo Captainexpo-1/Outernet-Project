@@ -26,14 +26,26 @@ input{
     padding: 20px;
     text-align: center;
     list-style-position: inside;
-    font-size: 25px;
+    font-size: 15px;
     left: 50px;
     border-radius: 10px;
 }
+#leaderboard-display li,
 #leaderboard li{
     transition: 1s;
     text-shadow: 2px 2px black;
 }
+#leaderboard-display{
+    position: fixed;
+    left: 50%;
+    transform: translate(-50%, 0%);
+}
+#leaderboard-display li{
+    transform: translate(25%, 0%)
+}
+
+
+#leaderboard-display li:hover,
 #leaderboard li:hover{
     transition: 0.3s;
     transform: scale(1.5);
@@ -110,6 +122,8 @@ input{
 .phrase{
     margin-top: 25px;
     transition: 0.5s;
+    user-select: none;
+
 }
 .phrase:hover{
     transition: 0.3s;
@@ -128,6 +142,29 @@ input{
     background: #43CC47;
     left: 10px;
     box-shadow: 3px 3px rgb(0, 98, 34);
+}
+#start{
+    position: fixed;
+    width: 100px;
+    height: 50px;
+    border: none;
+    font-size: 20px;
+    background: rgb(0,255,0);
+    color: rgb(0, 0, 0);
+    left: 50%;
+    color: white;
+    /* center */
+    transform: translate(-50%,0%);
+    top: 100px;
+    z-index: 1000;
+    border-radius: 10px;
+    box-shadow: 3px 3px rgb(0, 98, 34);
+    transition: 1s;
+}
+#start:hover{
+    transition: 1s;
+    box-shadow: none;
+    background: rgb(0,0,255);
 }
 .user-message{
     background: #1982FC;

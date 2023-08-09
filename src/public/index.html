@@ -8,10 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div id="description">
         The goal of this game is to get<br> 
-        the AI to say the prases that<br> 
+        the AI to say the phrases that<br> 
         are on the right side of the screen<br>
         as fast as possible.<br>
         Although, there's a few rules.<br>
@@ -25,6 +26,7 @@
         Good luck!
         
     </div>
+    <button id="start" onclick="startgame(); this.style = 'display: none;'">start</button>
     <ol id="leaderboard">
     </ol>
     <ul id="phrase-list">
@@ -32,7 +34,7 @@
     <div id="messages-container">
     </div>
     <form action="#">
-        <textarea name="" id="input-area" style="resize: none; width: 25%;" oninput="autoGrow(this)" onkeydown="handle(event)" rows="1"></textarea>
+        <textarea name="" id="input-area" oncopy="return false" onpaste="return false" style="resize: none; width: 25%;" oninput="autoGrow(this)" onkeydown="handle(event)" rows="1"></textarea>
     </form>
     <div id="time-display">00:00</div>
 </body>
